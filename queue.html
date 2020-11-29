@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var queue = [];
+        var pushIndex = 0;
+        var popIndex = 0;
+        var CAPACITY = 7;
+
+        function push() {
+            var ringInputEl = document.getElementById("ringInput");
+            var ringInput = ringInputEl.value;
+
+            if (pushIndex === CAPACITY) {
+                console.log("stack is  overflow")
+            } else {
+                console.log("stack is  not overflow")
+                queue[pushIndex] = ringInput;
+
+                //currentIndex++
+                pushIndex = pushIndex + 1; //counter bole
+
+            }
+
+            console.log(queue);
+            console.log(pushIndex);
+            ringInputEl.value = "";
+
+        }
+
+        function pop() {
+
+
+            //aga queue ta print hoba trpr increment hoba nahola array[0] jai ring ta acha ota delet hoba nah.
+            //currentIndex--
+            //eta keo counter bole
+            console.log(queue[popIndex]);
+            queue[popIndex] = undefined;
+            popIndex = popIndex + 1;
+
+            if (pushIndex === popIndex) {   // jokhn push kora hoa jabe trpr pop first thke start hoba
+                console.log("stack is empty")
+                pushIndex = 0; // push hoa jaber por pop hoba bt notun kora abr jokhn push korbo tokhn pushIndex thkbe.
+                popIndex = 0;
+            } else {
+                console.log("rings are present in stack")
+
+            }
+
+            console.log(queue);
+            console.log(popIndex);
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <input id="ringInput" type="text">
+    <button onclick="push()">push</button>
+    <button onclick="pop()">pop</button>
+</body>
+
+</html>

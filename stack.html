@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var stack = [];
+        var currentIndex = 0;
+        var CAPACITY = 7;
+
+        function push() {
+            var ringInputEl = document.getElementById("ringInput");
+            var ringInput = ringInputEl.value;
+
+            if (currentIndex === CAPACITY) {
+                console.log("stack is  overflow")
+            } else {
+                console.log("stack is  not overflow")
+                stack[currentIndex] = ringInput;
+
+                //currentIndex++
+                currentIndex = currentIndex + 1; //counter bole
+
+            }
+
+            console.log(stack);
+            console.log(currentIndex);
+            ringInputEl.value = "";
+
+        }
+
+        function pop() {
+
+            if (currentIndex === 0) {
+                console.log("stack is empty")
+            } else {
+                console.log("rings are present in stack")
+
+                //currentIndex--
+                currentIndex = currentIndex - 1; //eta keo counter bole
+                console.log(stack[currentIndex]);
+                stack[currentIndex] = undefined;
+            }
+            console.log(stack);
+            console.log(currentIndex);
+            
+        }
+
+       
+    </script>
+</head>
+
+<body>
+    <input id="ringInput" type="text">
+    <button onclick="push()">push</button>
+    <button onclick="pop()">pop</button>
+</body>
+
+</html>

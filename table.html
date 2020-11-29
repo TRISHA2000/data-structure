@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        //table hocha akta double dimension array
+        //double dimension array holo array ak akta elements r akta array hoa.
+        //eg : ai programer table hoacha array of rows
+        //rows hocha akta array of colums (Strings/ Numbers).
+        var header = ["Years", "English", "Bengali", "Maths"];
+        var row10 = ["10 markSheet", 50, 55, 40];
+        var row11 = ["11 markSheet", 60, 66, 67];
+        var row12 = ["12 markSheet", 60, 65, 69];
+
+        var table = [header, row10, row11, row12];
+
+        function displayTable() {
+            var rowvalstr = "";   //row ar value gulo k  concat krte hoba sai jona blank string niachi
+            for (var rowIndex = 0; rowIndex < table.length; rowIndex++) { //akhne loop cholbe table ar row ar jona 
+                var currentRow = table[rowIndex];      //cueerentrow varraible ar help tabel ar row gulo alo
+
+                var columnValStr = ""; // column ar value gulo k concat krte hoba sai jona blank string nilam
+
+                for (var columnIndex = 0; columnIndex < currentRow.length; columnIndex++) { //akhne column ar jona loop chalbo kintu row ar modha
+                    var currentColumn = (currentRow[columnIndex]);//current column varriable ar modha column ar index gulo dhukbe
+
+                    columnValStr = columnValStr + currentColumn + "\t\t\t";// concat kora holo current column ar sathe tab mare 
+
+                }
+                rowvalstr = rowvalstr + columnValStr + "\n";// row ar sathe column ar concat kra holo notun line 
+
+            }
+
+            console.log(rowvalstr);
+        }
+
+        displayTable();
+
+        function inputMarks() {
+
+            var yearEl = document.getElementById("insertion-year-input");
+            var year = yearEl.value;
+            year = parseInt(year);
+
+            var subjectEl = document.getElementById("insertion-subject-input");
+            var subject = subjectEl.value;
+
+            var marksEl = document.getElementById("insertion-marks-input");
+            var marks = marksEl.value;
+
+            header.push(subject);
+
+            /*
+            if(year == 10) {
+                row10.push(marks);
+            }
+            */
+
+            /*
+            if(year === "10") {
+                row10.push(marks);
+            }
+            */
+
+            /*
+            if (year === 10) {
+                row10.push(marks);
+            }
+            if (year === 11) {
+                row11.push(marks);
+            }
+            if (year === 12) {
+                row12.push(marks);
+            }
+            */
+
+            switch(year) {
+                case 10: {
+                    row10.push(marks);
+                    break;
+                }
+                case 11: {
+                    row11.push(marks);
+                    break;
+                }
+                case 12: {
+                    row12.push(marks);
+                    break;
+                }
+            }
+
+            displayTable();
+        }
+
+    </script>
+</head>
+
+<body>
+    <section>
+        <input id="insertion-year-input" type="number" placeholder="Enter Year">
+        <input id="insertion-subject-input" type="text" placeholder="Enter Subject">
+        <input id="insertion-marks-input" type="text" placeholder="Enter Marks">
+        <button id="insert-marks-btn" onclick="inputMarks()">Insert Marks</button>
+    </section>
+</body>
+
+</html>
