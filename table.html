@@ -14,6 +14,17 @@
 
         var table = [header, row10, row11, row12];
 
+        function clearInput() {
+            //document.getElementById("insertion-year-input").setAttribute("value", "Gora");
+            //console.log(document.getElementById("insertion-year-input").getAttribute("value"));
+            document.getElementById("insertion-year-input").value = "";
+            document.getElementById("insertion-subject-input").value = "";
+            document.getElementById("insertion-marks-input").value = "";
+        }
+        /* 
+        display kora somai amra loop bcs puro table ta string convert korar jona table ar column gulo akta akta kora 
+        concatinate kora amra akta puro row display krte parbo.
+        */
         function displayTable() {
             var rowvalstr = "";   //row ar value gulo k  concat krte hoba sai jona blank string niachi
             for (var rowIndex = 0; rowIndex < table.length; rowIndex++) { //akhne loop cholbe table ar row ar jona 
@@ -74,7 +85,8 @@
             }
             */
 
-            switch(year) {
+            //jokhn onk gulo if else akta var opor depend kora tokhn amra switch case use kri
+            switch (year) {
                 case 10: {
                     row10.push(marks);
                     break;
@@ -90,6 +102,64 @@
             }
 
             displayTable();
+            clearInput();
+        }
+
+        /* 
+        kono existing record k change kora ta k update bola.
+        */
+
+        function updateMarks() {
+            /*
+            step1 - year dakha bujhte hoba kon row k consider krte hoba 
+            step2 - subject ar index kon position acha sata check krte hoba. 
+                    Amra subject ta check krchi bcs table alada alada array te acha subject ar index 
+                    ar no dkhe o bujete parbe row ar kon postion ar index no k acess krte hoba.
+            */
+
+            var yearEl = document.getElementById("insertion-year-input");
+            var year = yearEl.value;
+            year = parseInt(year);
+
+            var subjectEl = document.getElementById("insertion-subject-input");
+            var subject = subjectEl.value;
+
+            var marksEl = document.getElementById("insertion-marks-input");
+            var marks = marksEl.value;
+
+            var row2Update; // akbre varriable decalre kora ami sob kotar jona use krte parbo nahola protek ta condition subject define kora marks assign krte hoto.
+            if (year === 10) {
+                row2Update = row10;
+                console.log("this is 10 marksheet");
+            }
+            else if (year === 11) {
+                row2Update = row11;
+                console.log("this is 11 marksheet")
+            }
+            else if (year === 12) {
+                row2Update = row12;
+                console.log("this is 12 marksheet")
+            }
+            //header = ["Years", "English", "Bengali", "Maths"];
+            //amra akhne header ar modha thke subject ar postion sign krchi.
+            var subjectIndex = -1;
+            for (var i = 0; i <= header.length; i++) {
+                if (subject === header[i]) {
+                    subjectIndex = i;
+                    break;
+                }
+            }
+            console.log(subjectIndex);
+            //akhn amra kon row update krte hoba saita pagachi kon index krte hoba saita pagachi.
+            row2Update[subjectIndex] = marks;
+
+            displayTable();
+            clearInput();
+
+        }
+
+        function deletSubject() {
+            console.log("now i am going to delet")
         }
 
     </script>
@@ -97,11 +167,14 @@
 
 <body>
     <section>
-        <input id="insertion-year-input" type="number" placeholder="Enter Year">
+        <input id="insertion-year-input" type="text" placeholder="Enter Year">
         <input id="insertion-subject-input" type="text" placeholder="Enter Subject">
         <input id="insertion-marks-input" type="text" placeholder="Enter Marks">
         <button id="insert-marks-btn" onclick="inputMarks()">Insert Marks</button>
+        <button id="updation-marks-btn" onclick="updateMarks()">Update Marks</button>
+        <button id="delet-marks-btn" onclick="deletSubject()">Delet Subject</button>
     </section>
+
 </body>
 
 </html>
