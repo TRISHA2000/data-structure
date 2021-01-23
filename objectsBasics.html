@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var linkedList = {
+            value: 1,
+            ref: {
+                value: 2,
+                ref: {
+                    value: 3,
+                    ref: {
+                        value: 4,
+                        ref: null
+                    }
+                }
+            }
+        }
+        
+        console.log(linkedList.value);
+        console.log(linkedList.ref.value);
+        console.log(linkedList.ref.ref.value);
+        console.log(linkedList.ref.ref.ref.value);
+        console.log(linkedList.length);//object does not have length property unlike string or array.
+    </script>
+</head>
+
+</html>

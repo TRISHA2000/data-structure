@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        //jokhn display korate jachi tokhn blank akta value drkr bcs first value ta k o point koranor jona.
+        //jodi amra currentobjectPointer dia chailai tahola display korar somai last object ta currentObjetPointer thkbe 
+        //saijona linkedlist name object niachi.
+        var linkedlist = {
+            value: null,
+            reference: null
+        }
+        currentObjectPointer = null; 
+
+        function insertValue() {
+
+            var valueElement = document.getElementById("insert-value")
+            var userValue = valueElement.value;
+            //jokhn currentObjectPointer ta null hoacha tarmane first value amr object dhukcha.
+            if (currentObjectPointer === null) {
+                console.log("this is the first senario");
+                linkedlist.value = userValue;
+                currentObjectPointer = linkedlist;//first value ta dhokar por currentObjectPointer ta first object k point krbe.
+            } else {
+                console.log("this is the rest of the senario");
+                var nodeObject = {
+                    value: userValue,
+                    reference: null
+                }
+                currentObjectPointer.reference = nodeObject;//second value ta dhokar por oi object ta k previous object ar reference add krbo
+                currentObjectPointer = nodeObject;//ar por currentObjectPointer ta second object k point krbe
+            }
+
+            displayLinkedlist();
+        }
+
+        function displayLinkedlist() {
+            var currentNodeObject = linkedlist;//first jokhn display korabo currentObject pointer ta first object point korabe
+            var valueString = "";
+             //object ar value gulo print korar jona amr puro object loop chalte hoba
+             //infact loop totokhn cholbe jotokhn currentObjectPointer null na hocha.
+            while (currentNodeObject.reference !== null) {
+                valueString = valueString + currentNodeObject.value + " -> ";//arpor amra currentObjectPointer ar value gulo k concate krbo
+                currentNodeObject = currentNodeObject.reference;//akhn currentObjectPointer ta nijar reference point kora o next objectjabe
+            }
+            valueString = valueString + currentNodeObject.value;// amke abr concatinate print korate hoacha bcs last object ar value print nahoa baria jacha.
+
+            console.log(valueString);
+        }
+    </script>
+</head>
+
+<body>
+    <input id="insert-value" type="text" placeholder="Enter value">
+    <button id="insert-value-button" onclick="insertValue()">Insert value</button>
+</body>
+
+</html>

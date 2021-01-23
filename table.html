@@ -157,11 +157,105 @@
             clearInput();
 
         }
-
+        //kono excisting record k clear kora k delet kora bola.
+        //akhne amra akta subject k clear krchi and tar sathe marks tao delet hocha.
         function deletSubject() {
-            console.log("now i am going to delet")
+            console.log("now i am going to delet");
+            /* 
+            step1: header thke amra subject ta k delet korbo.
+            step2: uI jai year ta dabe r jai subject ta dabe year ta dkha bujte hoba kon index postion ar marks ta delet krte hoba
+            */
+            var yearEl = document.getElementById("insertion-year-input");
+            var year = yearEl.value;
+            year = parseInt(year);
+
+            var subjectEl = document.getElementById("insertion-subject-input");
+            var subject = subjectEl.value;
+
+            //kon subject kon posion acha saita dkhar jona amra subject ar index bar krchi
+            var subjectIndex = -1;
+            for (var i = 0; i <= header.length; i++) {
+                if (subject === header[i]) {
+                    subjectIndex = i;
+                    break;
+                }
+            }
+            console.log(subjectIndex);
+
+            var newHeader = [];
+            var intilizeNo = 0;
+
+            //akhne amra header ar thke subject ta delete krchi 
+            for (var i = 0; i < header.length; i++) {
+                if (header[i] !== header[subjectIndex]) {
+                    newHeader[intilizeNo] = header[i]
+                    intilizeNo++
+                }
+            }
+            table[0] = newHeader; // purono header notun array k point krchilo bola table point krte parchilo nah.
+
+            //header thke subject delete hocha bt puro row ta delete kora jona amra ak akta kora row nia delete krchi.
+            var updatedRow10 = [];
+            var j = 0;
+            for (var i = 0; i < row10.length; i++) {
+                if(row10[i] !== row10[subjectIndex]){
+                    updatedRow10[j] = row10[i];
+                    j++;
+                }
+            }
+            table[1] = updatedRow10
+
+            var updatedRow11 = [];
+            var j = 0;
+            for (var i = 0; i < row11.length; i++) {
+                if(row11[i] !== row11[subjectIndex]){
+                    updatedRow11[j] = row11[i];
+                    j++;
+                }
+            }
+            table[2] = updatedRow11
+
+            var updatedRow12 = [];
+            var j = 0;
+            for (var i = 0; i < row12.length; i++) {
+                if(row12[i] !== row12[subjectIndex]){
+                    updatedRow12[j] = row12[i];
+                    j++;
+                }
+            }
+            
+            table[3] = updatedRow12
+
+            displayTable();
+            clearInput();
         }
 
+        //Only for Testing and troubleshooting purpose
+        //Do not delete
+        function removeItem() {
+            var newArr = [];
+            var newArrIdx = 0;
+
+            for (var i = 0; i < header.length; i++) {
+                if (i !== 1) {
+                    newArr.push(header[0]);
+                    //newArrIdx++;
+                }
+            }
+
+            return newArr;
+        }
+
+        function troubleshoot() {
+            console.log("Troubleshooting");
+            console.log(table);
+            //header[0] = "Subject"; //ekhane header value change korle, table a reflect hochhe
+            //header = removeItem();
+            //header = ["a", "b", "c"]; //ekhane header value change korle, table a reflect hochheNA
+            //tar karon jokhon header ke notun array pass kora hocche tokhon table ta header er notun reference pachhe na
+            console.log(header);
+            console.log(table);
+        }
     </script>
 </head>
 
@@ -173,6 +267,7 @@
         <button id="insert-marks-btn" onclick="inputMarks()">Insert Marks</button>
         <button id="updation-marks-btn" onclick="updateMarks()">Update Marks</button>
         <button id="delet-marks-btn" onclick="deletSubject()">Delet Subject</button>
+        <button id="troubleshoot" onclick="troubleshoot()">Update Ref</button>
     </section>
 
 </body>

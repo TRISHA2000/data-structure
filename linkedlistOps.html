@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        //jokhn display korate jachi tokhn blank akta value drkr bcs first value ta k o point koranor jona.
+        //jodi amra currentobjectPointer dia chailai tahola display korar somai last object ta currentObjetPointer thkbe 
+        //saijona linkedlist name object niachi.
+        var linkedlist = {
+            value: null,
+            reference: null
+        }
+        currentObjectPointer = null;
+
+        function clearInput() {
+
+            document.getElementById("insert-value").value = "";
+        }
+
+        function insertValue() {
+
+            var valueElement = document.getElementById("insert-value")
+            var userValue = parseInt(valueElement.value);
+            //jokhn currentObjectPointer ta null hoacha tarmane first value amr object dhukcha.
+            if (currentObjectPointer === null) {
+                console.log("this is the first senario");
+                linkedlist.value = userValue;
+                currentObjectPointer = linkedlist;//first value ta dhokar por currentObjectPointer ta first object k point krbe.
+            } else {
+                console.log("this is the rest of the senario");
+                var nodeObject = {
+                    value: userValue,
+                    reference: null
+                }
+                currentObjectPointer.reference = nodeObject;//second value ta dhokar por oi object ta k previous object ar reference add krbo
+                currentObjectPointer = nodeObject;//ar por currentObjectPointer ta second object k point krbe
+            }
+
+            displayLinkedlist();
+            clearInput();
+        }
+
+        function displayLinkedlist() {
+            var currentNodeObject = linkedlist;//first jokhn display korabo currentObject pointer ta first object point korabe
+            var valueString = "";
+            //object ar value gulo print korar jona amr puro object loop chalte hoba
+            //infact loop totokhn cholbe jotokhn currentObjectPointer null na hocha.
+            while (currentNodeObject.reference !== null) {
+                valueString = valueString + currentNodeObject.value + " -> ";//arpor amra currentObjectPointer ar value gulo k concate krbo
+                currentNodeObject = currentNodeObject.reference;//akhn currentObjectPointer ta nijar reference point kora o next objectjabe
+            }
+            valueString = valueString + currentNodeObject.value;// amke abr concatinate print korate hoacha bcs last object ar value print nahoa baria jacha.
+
+            console.log(valueString);
+        }
+
+        function insertBegValue() {
+            var valueElementBeg = document.getElementById("insert-value")
+            var begValue = parseInt(valueElementBeg.value);
+
+            if (currentObjectPointer === null) {
+                console.log("Now the linkedlist is empty");
+                linkedlist.value = begValue;
+                currentObjectPointer = linkedlist;
+
+            } else {
+                console.log("linkedlist is not empty")
+                var newObject = {
+                    value: begValue,
+                    reference: linkedlist
+                }
+
+                linkedlist = newObject;
+            }
+
+            displayLinkedlist()
+            clearInput()
+        }
+
+        function insertEndValue() {
+            var valueElementEnd = document.getElementById("insert-value")
+            var endValue = parseInt(valueElementEnd.value);
+            var currentObject = linkedlist;
+
+            if (currentObjectPointer === null) {
+                console.log("now the linkedlist is empty");
+                linkedlist.value = endValue;
+                currentObjectPointer = linkedlist
+            } else {
+                console.log("linkedlist is not empty")
+                while (currentObject.reference !== null) {
+                    currentObject = currentObject.reference;
+                }
+                var newObject = {
+                    value: endValue,
+                    reference: null
+                }
+                currentObject.reference = newObject;
+                currentObject = newObject;
+
+            }
+            displayLinkedlist()
+            clearInput()
+        }
+
+        function insertAscValue() {
+            var valueElementAsc = document.getElementById("insert-value")
+            var ascValue = parseInt(valueElementAsc.value);
+            currentObjectPointer = linkedlist;
+
+            var newObject = {
+                value: ascValue,
+                reference: null
+            }
+            var isValueInsertedFlag = false;
+            while (currentObjectPointer.reference !== null) {
+                if (newObject.value < currentObjectPointer.reference.value) {
+                    var nextNode = currentObjectPointer.reference;
+                    newObject.reference = nextNode;
+                    currentObjectPointer.reference = newObject;
+
+                    break;
+                }
+                currentObjectPointer = currentObjectPointer.reference;
+            }
+
+            if (isValueInsertedFlag === false) {
+                currentObjectPointer.reference = newObject;
+            }
+            displayLinkedlist();
+            clearInput();
+
+        }
+
+        function deleteBegValue() {
+            var valueElementBeg = document.getElementById("insert-value");
+            var begValue = parseInt(valueElementBeg.value);
+
+            if (currentObjectPointer === null) {
+                console.log("Now the linkedlist is empty");
+            } else {
+                linkedlist = linkedlist.reference;
+            }
+
+            displayLinkedlist();
+        }
+
+        function deleteEndValue() {
+            var valueElementEnd = document.getElementById("insert-value");
+            var endValue = parseInt(valueElementEnd.value);
+            var currentObject = linkedlist;
+
+            if (currentObjectPointer === null) {
+                console.log("Now the linkedlist is empty");
+            } else {
+                while (currentObject.reference.reference !== null) {
+                    currentObject = currentObject.reference;
+                }
+                currentObject.reference = null;
+            }
+            displayLinkedlist();
+        }
+
+        function deleteSpecificValue() {
+            var valueElementSpecific = document.getElementById("insert-value");
+            var specificValue = parseInt(valueElementSpecific.value);
+            var currentObject = linkedlist;
+
+            if (currentObjectPointer === null) {
+                console.log("Now the linkedlist is empty");
+            } else {
+                while (currentObject.reference.value !== specificValue) {
+                    currentObject = currentObject.reference;
+                }
+                currentObject.reference = currentObject.reference.reference;
+            }
+            displayLinkedlist();
+            clearInput();
+        }
+
+    </script>
+</head>
+
+<body>
+    <input id="insert-value" type="text" placeholder="Enter value">
+    <button id="insert-value-button" onclick="insertValue()">Insert value</button>
+    <button id="insertBeg-value-button" onclick="insertBegValue()">Insert in the beginning </button>
+    <button id="insertEnd-value-button" onclick="insertEndValue()">Insert in the end </button>
+    <button id="insertAsc-value-button" onclick="insertAscValue()">Insert in the ascending order </button>
+    <button id="deleteBeg-value-button" onclick="deleteBegValue()">Delete from the beginning </button>
+    <button id="deleteEnd-value-button" onclick="deleteEndValue()">Delete from the end </button>
+    <button id="speEnd-value-button" onclick="deleteSpecificValue()">Delete Specific number </button>
+
+</body>
+
+</html>

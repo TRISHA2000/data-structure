@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var header = ["Years", "English", "Bengali", "Maths"];
+        var row10 = ["10 markSheet", 43, 89, 33];
+        var row11 = ["11 markSheet", 22, 76, 45];
+        var row12 = ["12 markSheet", 29, 88, 29];
+        var table = [header, row10, row11, row12];
+
+        function displayTable() {
+            var rowvalstring = "";
+            for (var rowIndex = 0; rowIndex < table.length; rowIndex++) {
+                var currentRow = table[rowIndex];
+
+                var columnValString = "";
+
+                for (var columnIndex = 0; columnIndex < currentRow.length; columnIndex++) {
+                    var currentColumn = (currentRow[columnIndex]);
+
+                    columnValString = columnValString + currentColumn + "\t\t\t";
+
+                }
+                rowvalstring = rowvalstring + columnValString + "\n";
+
+            }
+
+            console.log(rowvalstring);
+        }
+
+        displayTable();
+
+        function inputMarks() {
+
+            var yearElement = document.getElementById("insert-year-input");
+            var year = yearElement.value;
+            year = parseInt(year);
+
+            var subjectElement = document.getElementById("insert-subject-input");
+            var subject = subjectElement.value;
+
+            var marksElement = document.getElementById("insert-marks-input");
+            var marks = marksElement.value;
+
+            header.push(subject);
+
+            if (year == 10) {
+                row10.push(marks);
+            }
+            if (year === 11) {
+                row11.push(marks);
+            }
+            if (year === 12) {
+                row12.push(marks);
+            }
+
+            displayTable();
+        }
+
+    </script>
+</head>
+
+<body>
+    <section>
+        <input id="insert-year-input" type="text" placeholder="Enter Year">
+        <input id="insert-subject-input" type="text" placeholder="Enter Subject">
+        <input id="insert-marks-input" type="text" placeholder="Enter Marks">
+        <button id="insert-marks-btn" onclick="inputMarks()">Insert Marks</button>
+    </section>
+</body>
+
+</html>
